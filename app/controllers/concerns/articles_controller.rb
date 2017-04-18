@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   end
   
   def index
-   @articles = Article.all  #grabs ol d articles in @article variable
+   @articles = Article.paginate(page: params[:page], per_page: 5)
   end
   
   def edit
@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
   
   def create
     #render plain: params[:article].inspect
-    debugger
+    
     @article=Article.new(article_params)
     @article.user=User.first
      if @article.save
